@@ -52,20 +52,22 @@ for i_2 = 1:(Nlines)
     end
 for i = 1:(Nsteps-1)
     fprintf('%.3f\t%.3f\t%.3f\n',t(i),x(i),y(i));
-
+% r vector is calculated for both charges
     r1(i) = (((x(i) - x_charge1)^2 + (y(i) - y_charge1)^2)^(3/2));
     r2(i) = (((x(i) - x_charge2)^2 + (y(i) - y_charge2)^2)^(3/2));
-    
+% E field is calculated for both charges 
     E_x1(i) = k*q1*(x(i) - x_charge1)/r1(i);
     E_y1(i) = k*q1*(y(i) - y_charge1)/r1(i);
-    
+
     E_x2(i) = k*q2*(x(i) - x_charge2)/r2(i);
     E_y2(i) = k*q2*(y(i) - y_charge2)/r2(i);
-    if (x(i) <= x_charge1*0.96)
+% when field line has reached the end point (connected to other charge) any points calculated near the -x axis beyond the positive charge give values of 10^5 and grow rapidly
+    if (x(i) <= x_charge1*0.98)
         x(i+1) = x_charge1;
         y(i+1) = y_charge1;
         t(i+1) = t(i) + dt*t(i);
     else
+    % otherwise the field lines graph well connecting the dipole together but with current sampling methods are limited to having a max distance of 10 to be effective from origin
         x(i+1) = x(i) + dt*(E_x1(i) + E_x2(i));
         y(i+1) = y(i) + dt*(E_y1(i) + E_y2(i));
         t(i+1) = t(i) + dt;
