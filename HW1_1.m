@@ -15,6 +15,7 @@
 % implementing question 2 for continuous charge distributions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+clf;
 
 % number of samples that will be taken
 Nsteps = 10000;
@@ -22,8 +23,8 @@ Nsteps = 10000;
 dt = 0.01;
 % initialization of arrays (used for other variables such as E1 and E2 so
 % to analyze data computer during execution
-x = zeros(1,Nsteps);
-y = zeros(1,Nsteps);
+x = nan*ones(1,Nsteps);
+y = nan*ones(1,Nsteps);
 t = zeros(1,Nsteps);
 E_x1 = zeros(1,Nsteps-1);
 E_y1 = zeros(1,Nsteps-1);
@@ -47,7 +48,7 @@ q2 = 1*10^(-9);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % initial condition for x created (will be moved within the for loop to
 % plot field lines to the left of the negative charge
-x(1) = x_charge2 + 0.1;
+x(1) = x_charge2 + 0.1; % Not used. Can delete.
 t(1) = 0;
 r1 = zeros(1,Nsteps);
 r2 = zeros(1,Nsteps);
@@ -56,7 +57,7 @@ Nlines = 20;
 fprintf('t\tx\ty\n')
 % want N field lines for each charge to be drawn
 % outer for loop to draw a new field line from charge at a different angle 
-for i_2 = 1:(Nlines)
+for i_2 = 4:4%(Nlines)
     % a total of N field lines are going to be drawn N/2 for each charge
     % first half will start using location of positive charge
     if i_2 <=(Nlines/2)  
@@ -86,8 +87,10 @@ for i_2 = 1:(Nlines)
         % approaching the negative charge (distance between point and
         % charge becomes smaller as one approaches the positive charge and
         % E field becomes extremely large fluctuation position
-        if (x(i) <= x_charge1*0.98)
-            % just causes the default valuet to stay at the charge one near
+        % Stop condition
+        if r2(i) < 0.5 || r2(i) < 0.5 || abs(x(i)) > 10 || abs(y(i)) > 10
+            break;
+            % just causes the default value to stay at the charge one near
             x(i+1) = x_charge1;
             y(i+1) = y_charge1;
             t(i+1) = t(i) + dt*t(i);

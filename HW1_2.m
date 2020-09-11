@@ -57,13 +57,17 @@ delta(2) = NaN;
 
 N_charges = 1:51;
 subplot(2,1,1)
-plot(N_charges, delta)
+loglog(N_charges, delta)
 xlabel('Charges on Line')
 ylabel('delta (units of 1/L)')
 title('Delta output correlation to number of charges');
 subplot(2,1,2)
 hold
-plot(N_charges, output)
+% Much easier to see convergence behavior using loglog and plotting error
+% as defined in problem statement.
+loglog(N_charges, 1-output,'.');hold on;
+loglog([3,N_charges(end)],[0.02,0.02],'k-')
+grid on;
 xlabel('# of Charges')
 ylabel('E field ratio $\frac{Approximate}{Exact}$','Interpreter','Latex')
 title('approximation accuracy');
