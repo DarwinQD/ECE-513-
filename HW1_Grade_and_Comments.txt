@@ -1,0 +1,3 @@
+Total: 10/10
+
+Make sure to use consistent file names so that when viewed in a file browser, things appear in correct order. Also, spaces in filenames tend to cause problems. I use an underscore instead.
