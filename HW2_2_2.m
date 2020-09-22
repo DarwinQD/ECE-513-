@@ -13,7 +13,7 @@ Phi_t = 100;
 % Initial values were found as the average of all borders
 Phi = [ 65, 65, 65, 65]
 % Outer for loop will compute each step completed in the table
-for n = 1:5
+for n = 1:10
     % inner for loop computes the step of each potential
     for i = 1:4
         % cases were made to know which are the neighboring borders to the 
