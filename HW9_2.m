@@ -8,6 +8,10 @@ figure(1);clf
 Niter = 600;   % number of iterations or "time steps" to run simulation
 Er = NaN(1,length(x));  % will not animate until Ei reaches boundary
 
+% This is a very nice plot.
+% If I do this again, I'd probably ask for an analytic calculation for
+% the VSWR curve and a line that shows it.
+% This could be done by 
 for i = 1:Niter
     Ei = cos(2*pi*(x-i)/lambda);    
     % Set values to right of wave front to NaN so they won't be plotted.
